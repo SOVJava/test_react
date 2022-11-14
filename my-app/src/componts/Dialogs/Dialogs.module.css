@@ -1,0 +1,32 @@
+.dialogsGrid{
+    display: grid;
+
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogs{
+    padding: 10px;
+    color: coral;
+}
+
+.dialog{
+
+}
+
+.linkDialog{
+    color: white;
+    text-decoration: none;
+}
+
+.linkDialog:focus{
+    color: gold;
+}
+
+.messages{
+    padding: 10px;
+    color: coral;
+}
+
+.message{
+    color: violet;
+}
