@@ -7,6 +7,8 @@ import News from "./componts/News/News";
 import Music from "./componts/Music/Music";
 import Settings from "./componts/Settings/Settings";
 import DialogsContainer, {SuperDialogsContainer} from "./componts/Dialogs/DialogsConteiner";
+import Users from "./componts/Users/Users";
+import {UsersContainer} from "./componts/Users/UsersConteiner";
 
 const App = (props) => {
     return (
@@ -18,6 +20,8 @@ const App = (props) => {
                     <Routes >
                         <Route path='/profile' exec element={<Profile />}/>
                         <Route path='/dialogs/*' element={<SuperDialogsContainer />}/>
+
+                        <Route path='/users' element={<UsersContainer />}/>
 
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>

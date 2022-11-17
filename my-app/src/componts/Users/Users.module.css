@@ -1,0 +1,19 @@
+.avatar{
+    width: 100px;
+    height: 100px;
+}
+
+.button button{
+    width: 100px;
+}
+
+.elements{
+    display: flex;
+    vertical-align: middle;
+    margin: 15px;
+}
+
+.desc{
+    color: coral;
+    margin-left: 15px;
+}
