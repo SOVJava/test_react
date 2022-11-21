@@ -17,3 +17,12 @@
     color: coral;
     margin-left: 15px;
 }
+
+.page{
+    color: chartreuse;
+}
+
+.selectedPage{
+    font-weight: bold;
+    font-size: large;
+}
