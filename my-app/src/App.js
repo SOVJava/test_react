@@ -1,34 +1,36 @@
 import './App.css';
-import Header from "./componts/Header/Header";
 import Navbar from "./componts/Navbar/Navbar";
-import Profile from "./componts/Profile/Profile";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useParams} from "react-router-dom";
 import News from "./componts/News/News";
 import Music from "./componts/Music/Music";
 import Settings from "./componts/Settings/Settings";
-import DialogsContainer, {SuperDialogsContainer} from "./componts/Dialogs/DialogsConteiner";
-import Users from "./componts/Users/Users";
+import {SuperDialogsContainer} from "./componts/Dialogs/DialogsConteiner";
 import {UsersContainer} from "./componts/Users/UsersConteiner";
+import ProfileContainer from "./componts/Profile/ProfileConteiner";
+import HeaderContainer from "./componts/Header/HeaderContainer";
 
 const App = (props) => {
     return (
 
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Routes >
-                        <Route path='/profile' exec element={<Profile />}/>
-                        <Route path='/dialogs/*' element={<SuperDialogsContainer />}/>
+        <div className='app-wrapper'>
+            <HeaderContainer />
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Routes>
+                    {/*<Route path='/profile/*' exec element={<ProfileContainer />}/>*/}
+                    <Route path='profile' element={<ProfileContainer/>} >
+                        <Route path=':userId' element={<ProfileContainer/>} />
+                    </Route>
+                    <Route path='/dialogs/*' element={<SuperDialogsContainer/>}/>
 
-                        <Route path='/users' element={<UsersContainer />}/>
+                    <Route path='/users' element={<UsersContainer/>}/>
 
-                        <Route path='/news' element={<News/>}/>
-                        <Route path='/music' element={<Music/>}/>
-                        <Route path='/settings' element={<Settings/>}/>
-                    </Routes>
-                </div>
+                    <Route path='/news' element={<News/>}/>
+                    <Route path='/music' element={<Music/>}/>
+                    <Route path='/settings' element={<Settings/>}/>
+                </Routes>
             </div>
+        </div>
     );
 }
 

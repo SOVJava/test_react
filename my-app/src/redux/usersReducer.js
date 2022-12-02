@@ -13,7 +13,7 @@ let initialState = {
     ],
     pageSize: 3,
     countUsers: 0,
-    currentPage: 2
+    currentPage: 1
 
 };
 

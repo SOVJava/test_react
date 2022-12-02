@@ -12,7 +12,7 @@ class UsersClass extends React.Component {
 
     showUsers = () => {
         if (this.props.usersData.length === 0) {
-            axios.get(`http://127.0.0.1:8087/service/users/page?page=${this.props.currentPage}&count=${this.props.pageSize}`, localStorage)
+            axios.get(`http://127.0.0.1:8087/users/page?page=${this.props.currentPage}&count=${this.props.pageSize}`, localStorage)
                 .then(response => {
                     this.props.setUsers(response.data.followers)
                     this.props.setCountUsers(response.data.count)
@@ -23,7 +23,7 @@ class UsersClass extends React.Component {
 
     onChangePage = (page) =>{
         this.props.setCurrentPage(page)
-        axios.get(`http://127.0.0.1:8087/service/users/page?page=${page}&count=${this.props.pageSize}`, localStorage)
+        axios.get(`http://127.0.0.1:8087/users/page?page=${page}&count=${this.props.pageSize}`, localStorage)
             .then(response => {
                 this.props.setUsers(response.data.followers)
             })
