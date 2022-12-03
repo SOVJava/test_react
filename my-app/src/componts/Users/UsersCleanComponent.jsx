@@ -1,8 +1,7 @@
 import React from "react";
 import css from "./Users.module.css";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {localStorage} from "../../redux/redux-store";
+import {usersAPI} from "../../api/api";
 
 let UserCleanComponent = (props) => {
 
@@ -33,22 +32,24 @@ let UserCleanComponent = (props) => {
                             </div>
                         </NavLink>
                         <div className={css.button}>
-                            {u.followed ?
-                                <button onClick={() => {
-                                    axios.get(`http://127.0.0.1:8087/users/unfollow/${u.id}`, localStorage)
-                                        .then(response => {
-                                            if (response.status === 200){
-                                                props.unfollow(u.id)
-                                            }
-                                        })
-                                }}>follow</button> :
-                                <button onClick={() => {
-                                    axios.get(`http://127.0.0.1:8087/users/follow/${u.id}`, localStorage)
-                                        .then(response => {
-                                            if (response.status === 200){
-                                                props.follow(u.id)
-                                            }
-                                        })
+                            {u.followed
+                                ? <button disabled={props.followingButton.some(id => id===u.id)} onClick={() => {
+                                    props.progressFollowing(true, u.id)
+                                    usersAPI.unfollow(u.id).then(response => {
+                                        if (response.status === 200) {
+                                            props.unfollow(u.id)
+                                        }
+                                        props.progressFollowing(false, u.id)
+                                    })
+                                }}>follow</button>
+                                : <button disabled={props.followingButton.some(id => id===u.id)} onClick={() => {
+                                    props.progressFollowing(true, u.id)
+                                    usersAPI.follow(u.id).then(response => {
+                                        if (response.status === 200) {
+                                            props.follow(u.id)
+                                        }
+                                        props.progressFollowing(false, u.id)
+                                    })
                                 }}>unfollow</button>}
                         </div>
                     </div>

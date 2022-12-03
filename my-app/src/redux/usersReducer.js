@@ -3,6 +3,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_COUNT_USERS = 'SET_COUNT_USERS';
+const BUTTON_IS_DISABLE = 'BUTTON_IS_DISABLE';
 
 let initialState = {
     usersData: [
@@ -13,13 +14,12 @@ let initialState = {
     ],
     pageSize: 3,
     countUsers: 0,
-    currentPage: 1
-
+    currentPage: 1,
+    followingButton: []
 };
 
 const usersReducer = (state = initialState, action) => {
     // window.state = state.usersData;
-
     switch (action.type) {
         case FOLLOW: {
             return {
@@ -59,6 +59,13 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 countUsers: action.countUsers
             }
+        }case BUTTON_IS_DISABLE: {
+            return {
+                ...state,
+                followingButton: action.isFollowing
+                    ? [...state.followingButton, action.idUser]
+                    : state.followingButton.filter(id => id != action.idUser)
+            }
         }
         default:
             return state;
@@ -70,5 +77,6 @@ export const unfollow = (userId) => ({type: UNFOLLOW, id: userId})
 export const setUsers = (usersData) => ({type: SET_USERS, users: usersData})
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
 export const setCountUsers = (countUsers) => ({type: SET_COUNT_USERS, countUsers: countUsers})
+export const progressFollowing = (isFollowing, idUser) => ({type: BUTTON_IS_DISABLE, isFollowing, idUser})
 
 export default usersReducer;

@@ -1,8 +1,7 @@
 import React from "react";
-import axios from "axios";
-import {localStorage} from "../../redux/redux-store";
 import image from '../../icons/user.png'
 import UserCleanComponent from "./UsersCleanComponent";
+import {usersAPI} from "../../api/api";
 
 class UsersClass extends React.Component {
 
@@ -12,22 +11,20 @@ class UsersClass extends React.Component {
 
     showUsers = () => {
         if (this.props.usersData.length === 0) {
-            axios.get(`http://127.0.0.1:8087/users/page?page=${this.props.currentPage}&count=${this.props.pageSize}`, localStorage)
+            usersAPI.getUsersPage(this.props.currentPage, this.props.pageSize)
                 .then(response => {
-                    this.props.setUsers(response.data.followers)
-                    this.props.setCountUsers(response.data.count)
+                    this.props.setUsers(response.followers)
+                    this.props.setCountUsers(response.count)
                 })
-                .catch(error => console.log(error));
         }
     }
 
     onChangePage = (page) =>{
         this.props.setCurrentPage(page)
-        axios.get(`http://127.0.0.1:8087/users/page?page=${page}&count=${this.props.pageSize}`, localStorage)
+        usersAPI.getNewUsersPage(page, this.props.pageSize)
             .then(response => {
-                this.props.setUsers(response.data.followers)
+                this.props.setUsers(response.followers)
             })
-            .catch(error => console.log(error));
     }
 
     render() {
@@ -40,6 +37,8 @@ class UsersClass extends React.Component {
             unfollow={this.props.unfollow}
             follow={this.props.follow}
             image={image}
+            followingButton={this.props.followingButton}
+            progressFollowing={this.props.progressFollowing}
         />
     }
 }

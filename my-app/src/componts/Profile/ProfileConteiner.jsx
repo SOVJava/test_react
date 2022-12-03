@@ -1,10 +1,9 @@
 import React from 'react';
 import Profile from "./Profile";
-import axios from "axios";
-import {localStorage} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {setUserProfile} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {usersAPI} from "../../api/api";
 
 function withRouter(Component) {
     function ComponentWithRouterProp(props) {
@@ -25,17 +24,14 @@ function withRouter(Component) {
 class ProfileContainer extends React.Component{
 
     componentDidMount() {
-        // debugger
         let userId = this.props.router.params.userId;
         if (userId === 'me'){
             userId = 1;
         }
-
-        axios.get(`http://127.0.0.1:8087/profile/get/${userId}`, localStorage)
+        usersAPI.getProfile(userId)
             .then(response => {
                 this.props.setUserProfile(response.data)
             })
-            .catch(error => console.log(error));
     }
 
     render() {

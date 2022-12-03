@@ -1,21 +1,19 @@
 import React from 'react';
-import css from './Header.module.css';
-import {NavLink} from "react-router-dom";
 import Header from "./Header";
 import axios from "axios";
 import {localStorage} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {setProfileAC} from "../../redux/authReducer";
+import {usersAPI} from "../../api/api";
 
 class HeaderContainer extends React.Component{
 
     componentDidMount() {
-        axios.get(`http://127.0.0.1:8087/profile/me`, localStorage)
+        usersAPI.myProfile()
             .then(response => {
                 let {id, fullName, status, contacts} = response.data;
                 this.props.setProfileAC(id, fullName, status, contacts)
             })
-            .catch(error => console.log(error));
     }
 
     render() {
