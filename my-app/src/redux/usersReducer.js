@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -54,12 +56,14 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 currentPage: action.currentPage
             }
-        }case SET_COUNT_USERS: {
+        }
+        case SET_COUNT_USERS: {
             return {
                 ...state,
                 countUsers: action.countUsers
             }
-        }case BUTTON_IS_DISABLE: {
+        }
+        case BUTTON_IS_DISABLE: {
             return {
                 ...state,
                 followingButton: action.isFollowing
@@ -78,5 +82,39 @@ export const setUsers = (usersData) => ({type: SET_USERS, users: usersData})
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
 export const setCountUsers = (countUsers) => ({type: SET_COUNT_USERS, countUsers: countUsers})
 export const progressFollowing = (isFollowing, idUser) => ({type: BUTTON_IS_DISABLE, isFollowing, idUser})
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        usersAPI.getUsersPage(currentPage, pageSize)
+            .then(response => {
+                dispatch(setUsers(response.followers))
+                dispatch(setCountUsers(response.count))
+            })
+    }
+}
+
+export const followUser = (id) => {
+    return (dispatch) => {
+        dispatch(progressFollowing(true, id))
+        usersAPI.follow(id).then(response => {
+            if (response.status === 200) {
+                dispatch(follow(id))
+            }
+            dispatch(progressFollowing(false, id))
+        })
+    }
+}
+
+export const unfollowUser = (id) => {
+    return (dispatch) => {
+        dispatch(progressFollowing(true, id))
+        usersAPI.unfollow(id).then(response => {
+            if (response.status === 200) {
+                dispatch(unfollow(id))
+            }
+            dispatch(progressFollowing(false, id))
+        })
+    }
+}
 
 export default usersReducer;

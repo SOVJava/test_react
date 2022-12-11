@@ -2,5 +2,4 @@ npm install react-router-dom --save
 npm install redux --save
 npm install react-redux --save
 npm install axios --save
-
-
+npm install redux-thunk  --save

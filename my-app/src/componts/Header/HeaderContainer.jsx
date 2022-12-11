@@ -1,19 +1,14 @@
 import React from 'react';
 import Header from "./Header";
-import axios from "axios";
-import {localStorage} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {setProfileAC} from "../../redux/authReducer";
-import {usersAPI} from "../../api/api";
+import {authProfile} from "../../redux/authReducer";
+
+
 
 class HeaderContainer extends React.Component{
 
     componentDidMount() {
-        usersAPI.myProfile()
-            .then(response => {
-                let {id, fullName, status, contacts} = response.data;
-                this.props.setProfileAC(id, fullName, status, contacts)
-            })
+        this.props.authProfile()
     }
 
     render() {
@@ -31,7 +26,7 @@ let mapStateToProps = (state) => {
 }
 
 let mapDispatchToProps = {
-    setProfileAC: setProfileAC
+    authProfile
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

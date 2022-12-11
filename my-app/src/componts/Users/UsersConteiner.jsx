@@ -1,6 +1,10 @@
 import {connect} from "react-redux";
 import UsersClass from "./UsersClass";
-import {follow, unfollow, setUsers, setCurrentPage, setCountUsers, progressFollowing} from "../../redux/usersReducer";
+import {
+    setCurrentPage,
+    progressFollowing,
+    getUsersThunkCreator, followUser, unfollowUser
+} from "../../redux/usersReducer";
 
 
 let mapStateToProps = (state) => {
@@ -14,12 +18,11 @@ let mapStateToProps = (state) => {
 }
 
 let mapDispatchToProps =  {
-    follow,
-    unfollow,
-    setUsers,
+    followUser,
+    unfollowUser,
     setCurrentPage,
-    setCountUsers,
-    progressFollowing
+    progressFollowing,
+    getUsers: getUsersThunkCreator
 }
 
 export let UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass)

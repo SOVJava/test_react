@@ -1,8 +1,10 @@
+import {usersAPI} from "../api/api";
+
 const SET_PROFILE = 'SET_PROFILE';
 
 let initialState = {
     id: null,
-    fullName: '',
+    fullName: null,
     status: '',
     contacts: []
 }
@@ -26,3 +28,13 @@ const authReducer = (state = initialState, action) => {
 export default authReducer;
 
 export const setProfileAC = (id, fullName, status, contacts)=>({type: SET_PROFILE, data: {id, fullName, status, contacts}})
+
+export const authProfile = () => {
+    return (dispatch) => {
+        usersAPI.myProfile()
+            .then(response => {
+                let {id, fullName, status, contacts} = response.data;
+                dispatch(setProfileAC(id, fullName, status, contacts))
+            })
+    }
+}

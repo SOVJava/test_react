@@ -4,7 +4,7 @@ import {localStorage} from "../redux/redux-store";
 const instance = axios.create({
     baseURL: "http://127.0.0.1:8087/",
     headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjcwMTAxMjAwfQ.wV4ZKYqN2yItjzOAU845O__r2ffhQETyxT4hh6rR567empKQOdgL2EHBpDfAVqBSV0rw3kzvF50SYDFvb9aJSA',
+        Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjcxOTE1NjAwfQ._xPLSHYl5EpgEcokwxOouoiurozG2s2EMUZsEOtGAZ01cLrrrAak35SBfFtBaDBqwHHli0wgYw3G55UwRYMGxw',
         'Content-Type': 'application/json',
     }
 });
