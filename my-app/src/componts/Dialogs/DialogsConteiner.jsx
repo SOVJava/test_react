@@ -3,6 +3,7 @@ import {addMessageCreator, updateNewMessageCreator} from "../../redux/dialogsRed
 import Dialogs from "./Dialogs";
 import StoreContext from "../../StoreContext";
 import {connect} from "react-redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 const DialogsContainer = () => {
 
@@ -51,6 +52,8 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-export let SuperDialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+let withAuthRedirectLogin = withAuthRedirect(Dialogs)
+
+export let SuperDialogsContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirectLogin)
 
 export default DialogsContainer;

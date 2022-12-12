@@ -3,8 +3,6 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {authProfile} from "../../redux/authReducer";
 
-
-
 class HeaderContainer extends React.Component{
 
     componentDidMount() {
@@ -18,10 +16,10 @@ class HeaderContainer extends React.Component{
     }
 }
 
-
 let mapStateToProps = (state) => {
     return {
-        fullName: state.auth.fullName
+        fullName: state.auth.fullName,
+        isAuth: state.auth.isAuth
     }
 }
 

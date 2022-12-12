@@ -6,7 +6,8 @@ let initialState = {
     id: null,
     fullName: null,
     status: '',
-    contacts: []
+    contacts: [],
+    isAuth: false
 }
 
 
@@ -17,7 +18,8 @@ const authReducer = (state = initialState, action) => {
             return{
                 ...state,
                 ...action.data,
-                contacts: action.data.contacts
+                contacts: action.data.contacts,
+                isAuth: true
             }
         }
         default:

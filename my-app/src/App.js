@@ -8,6 +8,7 @@ import {SuperDialogsContainer} from "./componts/Dialogs/DialogsConteiner";
 import {UsersContainer} from "./componts/Users/UsersConteiner";
 import ProfileContainer from "./componts/Profile/ProfileConteiner";
 import HeaderContainer from "./componts/Header/HeaderContainer";
+import Login from "./componts/Login/Login";
 
 const App = (props) => {
     return (
@@ -28,6 +29,7 @@ const App = (props) => {
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>
+                    <Route path='/login' element={<Login/>}/>
                 </Routes>
             </div>
         </div>
