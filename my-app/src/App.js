@@ -4,7 +4,7 @@ import {Route, Routes, useParams} from "react-router-dom";
 import News from "./componts/News/News";
 import Music from "./componts/Music/Music";
 import Settings from "./componts/Settings/Settings";
-import {SuperDialogsContainer} from "./componts/Dialogs/DialogsConteiner";
+import DialogsContainer from "./componts/Dialogs/DialogsConteiner";
 import {UsersContainer} from "./componts/Users/UsersConteiner";
 import ProfileContainer from "./componts/Profile/ProfileConteiner";
 import HeaderContainer from "./componts/Header/HeaderContainer";
@@ -22,7 +22,7 @@ const App = (props) => {
                     <Route path='profile' element={<ProfileContainer/>} >
                         <Route path=':userId' element={<ProfileContainer/>} />
                     </Route>
-                    <Route path='/dialogs/*' element={<SuperDialogsContainer/>}/>
+                    <Route path='/dialogs/*' element={<DialogsContainer/>}/>
 
                     <Route path='/users' element={<UsersContainer/>}/>
 

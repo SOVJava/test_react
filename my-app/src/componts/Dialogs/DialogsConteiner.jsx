@@ -1,36 +1,9 @@
 import React from 'react';
 import {addMessageCreator, updateNewMessageCreator} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
-import StoreContext from "../../StoreContext";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-
-const DialogsContainer = () => {
-
-    return (<div></div>
-        // <StoreContext.Consumer>{
-        //     (store) => {
-        //         let state = store.getState().messagePage;
-        //
-        //         let changeMessage = (value) => {
-        //             let action = updateNewMessageCreator(value);
-        //             store.dispatch(action);
-        //         };
-        //
-        //         let sendMessage = () => {
-        //             let action = addMessageCreator();
-        //             store.dispatch(action);
-        //         };
-        //
-        //         return <Dialogs dialogsData={state.dialogsData}
-        //                         messageData={state.messageData}
-        //                         newMessageDialog={state.newMessageDialog}
-        //                         onChangeMessage={changeMessage}
-        //                         onSendMessage={sendMessage}/>
-        //     }
-        // }</StoreContext.Consumer>
-    );
-}
+import {compose} from "redux";
 
 let mapStateToProps = (state) => {
     return {
@@ -52,8 +25,8 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-let withAuthRedirectLogin = withAuthRedirect(Dialogs)
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)
 
-export let SuperDialogsContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirectLogin)
-
-export default DialogsContainer;

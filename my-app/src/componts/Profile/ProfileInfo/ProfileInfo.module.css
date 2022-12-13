@@ -1,7 +1,11 @@
-.profileInfo{
+.profileInfo {
     padding: 10px;
 }
 
-.info{
+.info {
+    color: cyan;
+}
+
+.profileStatus {
     color: cyan;
 }
